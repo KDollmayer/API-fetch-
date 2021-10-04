@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      //    "source"
+      //    "publishedAt"
+      //    "url"
+      //    "id"
+
+      const root = document.getElementById("root")
+      fetch("https://mock-data-api.firebaseio.com/news/articles.json")
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((item) => {
+            const wrapper = document.createElement("div") //skapar en div åt varje object
+            const writer = document.createElement("h5")
+            writer.innerHTML = `Författare: ${
+              item.author || "Ingen information"
+            }`
+            const title = document.createElement("h1")
+            title.innerHTML = item.title
+
+            const description = document.createElement("strong")
+            description.innerHTML = item.description
+
+            const content = document.createElement("p")
+            content.innerHTML = item.content
+
+            const id = document.createElement("p")
+            id.innerHTML = `Id:${item.id}`
+
+            const source = document.createElement("p")
+            source.innerHTML = `Source: ${item.source.name}`
+
+            const image = document.createElement("img")
+            image.src = item.urlToImage
+            image.alt = item.title
+            image.width = "400"
+
+            const published = document.createElement("p")
+            published.innerHTML = ` Publicerad: ${item.publishedAt}`
+
+            const urlFile = document.createElement("a")
+            urlFile.href = item.url
+            urlFile.innerHTML = `Länk till artikel`
+            urlFile.target = "_blank"
+
+            const brake = document.createElement("hr")
+
+            wrapper.appendChild(image)
+            wrapper.appendChild(title)
+
+            wrapper.appendChild(content)
+            wrapper.appendChild(description)
+
+            wrapper.appendChild(writer)
+            wrapper.appendChild(published)
+            wrapper.appendChild(id)
+            wrapper.appendChild(source)
+
+            wrapper.appendChild(urlFile)
+            wrapper.appendChild(brake)
+            root.appendChild(wrapper)
+          })
+        })
+    </script>
+  </body>
+</html>

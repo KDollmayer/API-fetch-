@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="coffeeTypes"></div>
+    <script>
+      // hämta från externt API
+      fetch("https://image-mock-data.firebaseio.com/coffeeshop.json")
+        //gör ett anrop
+        .then((Response) => Response.json())
+        //hämtar ut data från responsen
+        .then((data) => {
+          const coffeeTypes = document.getElementById("coffeeTypes")
+          data.forEach((coffe) => {
+            const p = document.createElement("p")
+            p.innerHTML = coffe.name
+            coffeeTypes.appendChild(p)
+          })
+        })
+      //tillgång till datat
+
+      console.log("2")
+    </script>
+  </body>
+</html>

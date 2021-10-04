@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = document.getElementById("root")
+
+      fetch("https://image-mock-data.firebaseio.com/coffeeshop.json")
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((coffee) => {
+            const wrapper = document.createElement("div")
+
+            const coffeeSor = document.createElement("h1")
+            coffeeSor.innerHTML = coffee.name
+
+            const price = document.createElement("h4")
+            price.innerHTML = coffee.price
+
+            const line = document.createElement("hr")
+
+            wrapper.appendChild(coffeeSor)
+            wrapper.appendChild(price)
+            wrapper.appendChild(line)
+            root.appendChild(wrapper)
+          })
+        })
+    </script>
+  </body>
+</html>
