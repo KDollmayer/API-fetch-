@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body id="bodyTag">
+    <div id="root"></div>
+    <script>
+      const root = document.getElementById("root")
+      const bodyTag = document.getElementById("bodyTag")
+      bodyTag.style.background = "#F58220"
+      bodyTag.style.margin = "0"
+
+      fetch("https://mock-data-api.firebaseio.com/users.json")
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((item) => {
+            const wrapper = document.createElement("div")
+            const hr = document.createElement("hr")
+            hr.size = "10px"
+            hr.color = "#00836C"
+            hr.style.margin = "0"
+            wrapper.style.color = "#004F41"
+            wrapper.style.textAlign = "center"
+
+            const fullName = document.createElement("strong")
+            fullName.innerHTML = `Fullname: ${item.name}`
+            const suiteNumber = document.createElement("p")
+
+            suiteNumber.innerHTML = item.address.suite
+
+            const streetName = document.createElement("p")
+            streetName.innerHTML = `${item.address.city} <br> <br>${item.address.street}`
+
+            wrapper.appendChild(fullName)
+            wrapper.appendChild(streetName)
+            wrapper.appendChild(suiteNumber)
+            wrapper.appendChild(hr)
+            root.appendChild(wrapper)
+          })
+        })
+    </script>
+  </body>
+</html>
